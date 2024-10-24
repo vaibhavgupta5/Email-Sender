@@ -8,6 +8,7 @@ const Home = () => {
   const [subject, setSubject] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [status, setStatus] = useState<string>('');
+  const [isTooltipVisible, setTooltipVisible] = useState<boolean>(false); // State for tooltip visibility
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -76,14 +77,23 @@ const Home = () => {
               placeholder="example1@mail.com, example2@mail.com"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Upload Excel Sheet:</label>
+          <div className="relative cursor-pointer">
+            <label className="block text-sm font-medium   text-gray-700 mb-1">
+              Or Upload Data from Excel Sheet:
+            </label>
             <input
               type="file"
               accept=".xlsx, .xls"
-              className="w-full text-sm"
+              className="w-full cursor-pointer text-sm"
               onChange={handleFileUpload}
+              onMouseEnter={() => setTooltipVisible(true)}
+              onMouseLeave={() => setTooltipVisible(false)}
             />
+            {isTooltipVisible && (
+              <div className="absolute mt-1 bg-gray-200 text-gray-700 text-sm rounded-md p-2 shadow-lg">
+                Upload a spreadsheet with a list of emails in column A.
+              </div>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Subject:</label>
@@ -113,7 +123,7 @@ const Home = () => {
             Send Emails
           </button>
         </form>
-        {status && <p className="text-center mt-4 text-sm font-medium text-red-600">{status}</p>}
+        {status && <p className="text-center mt-4 text-sm font-medium text-black">{status}</p>}
       </div>
     </div>
   );
