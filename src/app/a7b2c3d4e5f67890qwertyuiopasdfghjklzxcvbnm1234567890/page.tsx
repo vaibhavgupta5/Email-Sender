@@ -54,8 +54,8 @@ const Home = () => {
       } else {
         setStatus('Error sending emails.'); 
       }
-    } catch (error: any) {
-      const errorMsg = error.response?.data?.error || 'Failed to send emails';
+    } catch (error) {
+      const errorMsg = `Failed to send emails,${error} `;
       setStatus(`Error: ${errorMsg}`);
     }
   };

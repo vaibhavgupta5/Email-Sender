@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
-console.log(process.env.SENDGRID_API_KEY)
 
 export async function POST(req: NextRequest) {
   try {
